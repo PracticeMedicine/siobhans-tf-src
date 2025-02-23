@@ -246,7 +246,25 @@ CTFBot* SpawnRedTFBot(int botclass, const Vector& spot) {
 	newBot->SetBloodColor(DONT_BLEED);
 	return newBot;
 }
+CObjectSentrygun* SpawnSentry(const Vector& spot) {
+	// directly create a sentry gun at the precise position and orientation desired
+	CObjectSentrygun* sentry = (CObjectSentrygun*)CreateEntityByName("obj_sentrygun");
+	if (sentry)
+	{
+		sentry->SetAbsOrigin(spot);
+		sentry->SetAbsAngles(vec3_angle);
 
+		sentry->Spawn();
+		sentry->ChangeTeam(TF_TEAM_RED);
+
+		sentry->m_nDefaultUpgradeLevel = 2;
+
+		sentry->InitializeMapPlacedObject();
+
+		return sentry;
+	}
+	return NULL;
+}
 //--------------------------------------------------------------------------------------------------------
 bool SpawnWanderer( const Vector &spot )
 {
@@ -381,7 +399,7 @@ void CRaidLogic::OnRoundStart( void )
 
 	for( int i=0; i<m_actualSentrySpotVector.Count(); ++i )
 	{
-		//SpawnSentry( m_actualSentrySpotVector[i]->GetCenter() );
+		SpawnSentry( m_actualSentrySpotVector[i]->GetCenter() );
 	}
 
 	DevMsg( "RAID: Total sentry population = %d\n", m_actualSentrySpotVector.Count() );

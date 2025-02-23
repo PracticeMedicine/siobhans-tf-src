@@ -147,15 +147,29 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 	{
 
 
+		if ( me->GetTeamNumber() == TF_TEAM_BLUE )
+		{
+			// bot teammates
+			return new CTFBotCompanion;
+		}
+
+		if (me->IsInASquad())
+		{
+			// squad behavior
+			return new CTFBotSquadAttack;
+			//return new CTFBotSeekAndDestroy;
+		}
+
+
 		if (me->IsPlayerClass(TF_CLASS_SNIPER))
 		{
 			return new CTFBotSniperLurk;
 		}
 
-		if (me->IsPlayerClass(TF_CLASS_SPY))
-		{
+		//if (me->IsPlayerClass(TF_CLASS_SPY))
+		//{
 			//return new CTFBotSpyInfiltrate;
-		}
+		//}
 
 		if (me->IsPlayerClass(TF_CLASS_SPY))
 		{
@@ -183,31 +197,13 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 			}
 		}
 
-		if (me->IsPlayerClass(TF_CLASS_ENGINEER))
-		{
-			return new CTFBotEngineerBuild;
-		}
-
-		if ( me->GetTeamNumber() == TF_TEAM_BLUE )
-		{
-			// bot teammates
-			return new CTFBotCompanion;
-		}
-
-		if (me->IsInASquad())
-		{
-			// squad behavior
-			// return new CTFBotSquadAttack;
-			return new CTFBotSeekAndDestroy;
-		}
-
 		if (me->IsPlayerClass(TF_CLASS_SCOUT))
 		{
 			return new CTFBotWander;
 		}
 
-		return new CTFBotSeekAndDestroy;
-		//return new CTFBotGuardArea;
+		//return new CTFBotSeekAndDestroy;
+		return new CTFBotGuardArea;
 	}
 #endif // TF_RAID_MODE	
 
