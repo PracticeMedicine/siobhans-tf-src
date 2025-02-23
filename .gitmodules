@@ -1,0 +1,3 @@
+[submodule "game/mod_tf"]
+	path = game/mod_tf
+	url = https://github.com/siobhan-saoirse/siobhans_tf
