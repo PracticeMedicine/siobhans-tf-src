@@ -253,7 +253,13 @@ bool SpawnWanderer( const Vector &spot )
 	if ( !tf_raid_spawn_wanderers.GetBool() )
 		return false;
 
-	return SpawnRedTFBot( TF_CLASS_SCOUT, spot ) ? true : false;
+	CTFBot* newBot = SpawnRedTFBot( TF_CLASS_SCOUT, spot );
+	if (newBot)
+	{
+		newBot->SetAttribute(CTFBot::AGGRESSIVE);
+		return true;
+	}
+	return false;
 
 /*
 	CBaseCombatCharacter *minion = static_cast< CBaseCombatCharacter * >( CreateEntityByName( "bot_npc_minion" ) );
@@ -359,7 +365,7 @@ void CRaidLogic::OnRoundStart( void )
 	for( int i=0; i<minionAreaVector.Count(); ++i )
 	{
 		static_cast< CTFNavArea * >( minionAreaVector[i] )->AddToWanderCount( 1 );
-		//SpawnWanderer( minionAreaVector[i]->GetRandomPoint() );
+		SpawnWanderer( minionAreaVector[i]->GetRandomPoint() );
 	}
 
 	DevMsg( "RAID: Total minion population = %d\n", minionAreaVector.Count() );

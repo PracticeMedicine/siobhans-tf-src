@@ -152,15 +152,15 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 			return new CTFBotCompanion;
 		}
 
-		if ( me->IsInASquad() )
+		if (me->IsInASquad())
 		{
 			// squad behavior
-			return new CTFBotSeekAndDestroy;
+			return new CTFBotSquadAttack;
 		}
 
-		if ( me->IsPlayerClass( TF_CLASS_SCOUT ) || me->HasAttribute( CTFBot::AGGRESSIVE ) )
+		if (me->IsPlayerClass(TF_CLASS_SCOUT) || me->HasAttribute(CTFBot::AGGRESSIVE))
 		{
-			return new CTFBotSeekAndDestroy;
+			return new CTFBotWander;
 		}
 
 		if ( me->IsPlayerClass( TF_CLASS_SNIPER ) )
@@ -176,6 +176,11 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 		if (me->IsPlayerClass(TF_CLASS_MEDIC))
 		{
 			return new CTFBotMedicHeal;
+		}
+
+		if (me->IsPlayerClass(TF_CLASS_ENGINEER))
+		{
+			return new CTFBotEngineerBuild;
 		}
 
 		return new CTFBotSeekAndDestroy;
