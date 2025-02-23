@@ -365,7 +365,7 @@ void CRaidLogic::OnRoundStart( void )
 	for( int i=0; i<minionAreaVector.Count(); ++i )
 	{
 		static_cast< CTFNavArea * >( minionAreaVector[i] )->AddToWanderCount( 1 );
-		SpawnWanderer( minionAreaVector[i]->GetRandomPoint() );
+		//SpawnWanderer( minionAreaVector[i]->GetRandomPoint() );
 	}
 
 	DevMsg( "RAID: Total minion population = %d\n", minionAreaVector.Count() );
@@ -579,11 +579,11 @@ public:
 		while( area->GetWanderCount() > 0 && --maxSpawnCount && m_spaceLeft )
 		{
 			// attempt to spawn a wanderer here
-			//if ( SpawnWanderer( area->GetRandomPoint() + Vector( 0, 0, StepHeight ) ) )
-			//{
-				//area->SetWanderCount( area->GetWanderCount() - 1 );
-				//--m_spaceLeft;
-			//}
+			if ( SpawnWanderer( area->GetRandomPoint() + Vector( 0, 0, StepHeight ) ) )
+			{
+				area->SetWanderCount( area->GetWanderCount() - 1 );
+				--m_spaceLeft;
+			}
 		}
 
 		return true;

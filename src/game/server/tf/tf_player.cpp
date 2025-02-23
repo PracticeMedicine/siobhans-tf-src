@@ -4937,7 +4937,7 @@ void CTFPlayer::ManageRegularWeapons( TFPlayerClassData_t *pData )
 
 	if (IsBot() && MyNextBotPointer() != nullptr) {
 		CTFBot* bot = ToTFBot(this);
-		if (!TFGameRules()->IsMannVsMachineMode() || TFGameRules()->IsMannVsMachineMode() && GetTeamNumber() == TF_TEAM_PVE_DEFENDERS)
+		if (!TFGameRules()->IsMannVsMachineMode() && !TFGameRules()->IsRaidMode() && !TFGameRules()->IsBossBattleMode() || TFGameRules()->IsMannVsMachineMode() && GetTeamNumber() == TF_TEAM_PVE_DEFENDERS)
 		{
 			bot->GiveRandomItem(LOADOUT_POSITION_PRIMARY);
 			bot->GiveRandomItem(LOADOUT_POSITION_SECONDARY);

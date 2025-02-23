@@ -145,7 +145,49 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 	}
 	else if ( TFGameRules()->IsRaidMode() )
 	{
-		
+
+
+		if (me->IsPlayerClass(TF_CLASS_SNIPER))
+		{
+			return new CTFBotSniperLurk;
+		}
+
+		if (me->IsPlayerClass(TF_CLASS_SPY))
+		{
+			//return new CTFBotSpyInfiltrate;
+		}
+
+		if (me->IsPlayerClass(TF_CLASS_SPY))
+		{
+			return new CTFBotSpyLeaveSpawnRoom;
+		}
+
+		if (me->IsPlayerClass(TF_CLASS_MEDIC))
+		{
+			// if I'm being healed by another medic, I should do something else other than healing
+			bool bIsBeingHealedByAMedic = false;
+			int nNumHealers = me->m_Shared.GetNumHealers();
+			for (int i = 0; i < nNumHealers; ++i)
+			{
+				CBaseEntity* pHealer = me->m_Shared.GetHealerByIndex(i);
+				if (pHealer && pHealer->IsPlayer())
+				{
+					bIsBeingHealedByAMedic = true;
+					break;
+				}
+			}
+
+			if (!bIsBeingHealedByAMedic)
+			{
+				return new CTFBotMedicHeal;
+			}
+		}
+
+		if (me->IsPlayerClass(TF_CLASS_ENGINEER))
+		{
+			return new CTFBotEngineerBuild;
+		}
+
 		if ( me->GetTeamNumber() == TF_TEAM_BLUE )
 		{
 			// bot teammates
@@ -155,35 +197,17 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 		if (me->IsInASquad())
 		{
 			// squad behavior
-			return new CTFBotSquadAttack;
+			// return new CTFBotSquadAttack;
+			return new CTFBotSeekAndDestroy;
 		}
 
-		if (me->IsPlayerClass(TF_CLASS_SCOUT) || me->HasAttribute(CTFBot::AGGRESSIVE))
+		if (me->IsPlayerClass(TF_CLASS_SCOUT))
 		{
 			return new CTFBotWander;
 		}
 
-		if ( me->IsPlayerClass( TF_CLASS_SNIPER ) )
-		{
-			return new CTFBotSniperLurk;
-		}
-
-		if ( me->IsPlayerClass( TF_CLASS_SPY ) )
-		{
-			return new CTFBotSpyInfiltrate;
-		}
-
-		if (me->IsPlayerClass(TF_CLASS_MEDIC))
-		{
-			return new CTFBotMedicHeal;
-		}
-
-		if (me->IsPlayerClass(TF_CLASS_ENGINEER))
-		{
-			return new CTFBotEngineerBuild;
-		}
-
 		return new CTFBotSeekAndDestroy;
+		//return new CTFBotGuardArea;
 	}
 #endif // TF_RAID_MODE	
 

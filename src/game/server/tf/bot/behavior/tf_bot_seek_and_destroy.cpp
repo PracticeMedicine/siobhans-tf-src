@@ -92,7 +92,7 @@ ActionResult< CTFBot >	CTFBotSeekAndDestroy::Update( CTFBot *me, float interval 
 	const CKnownEntity *threat = me->GetVisionInterface()->GetPrimaryKnownThreat();
 	if ( threat )
 	{
-		if ( TFGameRules()->RoundHasBeenWon() )
+		if ( TFGameRules()->RoundHasBeenWon() || TFGameRules()->IsRaidMode() )
 		{
 			// hunt down the losers
 			return SuspendFor( new CTFBotAttack, "Chasing down the losers" );

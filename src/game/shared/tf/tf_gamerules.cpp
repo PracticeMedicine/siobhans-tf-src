@@ -2171,12 +2171,12 @@ bool CTFGameRules::IsCommunityGameMode( void ) const
 
 bool CTFGameRules::IsCompetitiveMode( void ) const
 {
-	return !IsMannVsMachineMode();
+	return !IsMannVsMachineMode() && !IsRaidMode() && !IsBossBattleMode();
 }
 
 bool CTFGameRules::IsMatchTypeCasual( void ) const
 {
-	return !IsMannVsMachineMode();
+	return !IsMannVsMachineMode() && !IsRaidMode() && !IsBossBattleMode();
 }
 
 bool CTFGameRules::IsMatchTypeCompetitive( void ) const
@@ -2200,7 +2200,7 @@ bool CTFGameRules::BInMatchStartCountdown() const
 
 ETFMatchGroup CTFGameRules::GetCurrentMatchGroup() const
 {
-	return IsMannVsMachineMode() ? k_eTFMatchGroup_MvM_MannUp : k_eTFMatchGroup_Casual_12v12;
+	return IsMannVsMachineMode() ? k_eTFMatchGroup_MvM_MannUp : IsRaidMode() || IsBossBattleMode() ? k_eTFMatchGroup_Invalid : k_eTFMatchGroup_Casual_12v12;
 }
 
 bool CTFGameRules::IsManagedMatchEnded() const
