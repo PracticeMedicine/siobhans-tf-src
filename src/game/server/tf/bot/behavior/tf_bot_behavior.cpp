@@ -530,7 +530,7 @@ EventDesiredResult< CTFBot > CTFBotMainAction::OnStuck( CTFBot *me )
 		me->PressRightButton();
 	}
 
-/*
+
 	if ( me->GetLocomotionInterface()->GetStuckDuration() > 3.0f )
 	{
 		// stuck for too long, do something drastic
@@ -542,7 +542,7 @@ EventDesiredResult< CTFBot > CTFBotMainAction::OnStuck( CTFBot *me )
 			UTIL_LogPrintf( "%3.2f: TFBot '%s' stuck for too long - slammed to goal position. Entindex = %d.\n", gpGlobals->curtime, me->GetPlayerName(), me->entindex() );
 		}
 	}
-*/
+
 
 	return TryContinue();
 }

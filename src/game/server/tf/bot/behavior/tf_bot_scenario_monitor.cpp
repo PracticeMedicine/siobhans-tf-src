@@ -149,18 +149,18 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 		if ( me->GetTeamNumber() == TF_TEAM_BLUE )
 		{
 			// bot teammates
-			//return new CTFBotCompanion;
+			return new CTFBotCompanion;
 		}
 
 		if ( me->IsInASquad() )
 		{
 			// squad behavior
-			//return new CTFBotSeekAndDestroy;
+			return new CTFBotSeekAndDestroy;
 		}
 
 		if ( me->IsPlayerClass( TF_CLASS_SCOUT ) || me->HasAttribute( CTFBot::AGGRESSIVE ) )
 		{
-			//return new CTFBotSeekAndDestroy;
+			return new CTFBotSeekAndDestroy;
 		}
 
 		if ( me->IsPlayerClass( TF_CLASS_SNIPER ) )
@@ -178,32 +178,7 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 			return new CTFBotMedicHeal;
 		}
 
-		if (me->IsPlayerClass(TF_CLASS_ENGINEER))
-		{
-			return new CTFBotEngineerBuild;
-		}
-
-		// if we have a point we can capture - do it
-		CUtlVector< CTeamControlPoint* > captureVector;
-		TFGameRules()->CollectCapturePoints(me, &captureVector);
-
-		if (captureVector.Count() > 0)
-		{
-			return new CTFBotCapturePoint;
-		}
-
-		// otherwise, defend our point(s) from capture
-		CUtlVector< CTeamControlPoint* > defendVector;
-		TFGameRules()->CollectDefendPoints(me, &defendVector);
-
-		if (defendVector.Count() > 0)
-		{
-			return new CTFBotDefendPoint;
-		}
-
-		// likely KotH mode and/or all points are locked - assume capture
-		DevMsg("%3.2f: %s: Gametype is CP, but I can't find a point to capture or defend!\n", gpGlobals->curtime, me->GetDebugIdentifier());
-		return new CTFBotCapturePoint;
+		return new CTFBotSeekAndDestroy;
 	}
 #endif // TF_RAID_MODE	
 
