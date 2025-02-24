@@ -2307,7 +2307,7 @@ void CTFBot::SetupSniperSpotAccumulation( void )
 
 	CBaseEntity *goalEntity = NULL;
 
-	if ( TFGameRules()->GetGameType() == TF_GAMETYPE_ESCORT )
+	if ( TFGameRules()->GetGameType() == TF_GAMETYPE_ESCORT || TFGameRules()->HasMultipleTrains() )
 	{
 		// try to find a payload cart to guard
 		CTeamTrainWatcher *trainWatcher = TFGameRules()->GetPayloadToPush( GetTeamNumber() );
