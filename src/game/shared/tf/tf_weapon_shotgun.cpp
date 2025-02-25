@@ -450,7 +450,7 @@ bool CTFScatterGun::SendWeaponAnim( int iActivity )
 	CTFPlayer *pPlayer = GetTFPlayerOwner();
 	if ( !pPlayer )
 		return BaseClass::SendWeaponAnim( iActivity );
-
+	/*
 	if ( HasKnockback() )
 	{
 		// Knockback version uses a different model and animation set.
@@ -493,6 +493,7 @@ bool CTFScatterGun::SendWeaponAnim( int iActivity )
 			break;
 		}
 	}
+	*/
 
 	return BaseClass::SendWeaponAnim( iActivity );
 }
