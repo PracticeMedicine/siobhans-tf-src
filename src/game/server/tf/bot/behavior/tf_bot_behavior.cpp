@@ -90,6 +90,16 @@ ActionResult< CTFBot >	CTFBotMainAction::OnStart( CTFBot *me, Action< CTFBot > *
 #endif // TF_CREEP_MODE
 
 
+	if (!TFGameRules()->IsMannVsMachineMode() && !TFGameRules()->IsRaidMode() && !TFGameRules()->IsBossBattleMode() || TFGameRules()->IsMannVsMachineMode() && me->GetTeamNumber() == TF_TEAM_PVE_DEFENDERS)
+	{
+		me->GiveRandomItem(LOADOUT_POSITION_PRIMARY);
+		me->GiveRandomItem(LOADOUT_POSITION_SECONDARY);
+		me->GiveRandomItem(LOADOUT_POSITION_MELEE);
+
+		me->GiveRandomItem(LOADOUT_POSITION_HEAD);
+		me->GiveRandomItem(LOADOUT_POSITION_MISC);
+		me->GiveRandomItem(LOADOUT_POSITION_MISC2);
+	}
 
 	return Continue();
 }

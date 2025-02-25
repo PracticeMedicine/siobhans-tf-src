@@ -6058,6 +6058,7 @@ void C_TFPlayer::ClientThink()
 			GetGlowObject()->SetEntity( this );
 		}
 	}
+	/*
 	// this code was added for a new sniper rifle that was being looked at, but it breaks glows for existing players by always
 	// turning off the glow if the weapon doesn't think it needs to be on. this needs to be fixed before we can use it.
 	// some mods use the glows and the SourceTV clients see player glows when they're watching a match.
@@ -6091,7 +6092,7 @@ void C_TFPlayer::ClientThink()
 			}
 		}
 
-	}
+	}*/
 	m_Shared.ClientKillStreakBuffThink();
 
 /*

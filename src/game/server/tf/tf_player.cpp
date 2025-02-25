@@ -4939,15 +4939,7 @@ void CTFPlayer::ManageRegularWeapons( TFPlayerClassData_t *pData )
 		CTFBot* bot = ToTFBot(this);
 		if (!TFGameRules()->IsMannVsMachineMode() && !TFGameRules()->IsRaidMode() && !TFGameRules()->IsBossBattleMode() || TFGameRules()->IsMannVsMachineMode() && GetTeamNumber() == TF_TEAM_PVE_DEFENDERS)
 		{
-			bot->GiveRandomItem(LOADOUT_POSITION_PRIMARY);
-			bot->GiveRandomItem(LOADOUT_POSITION_SECONDARY);
-			bot->GiveRandomItem(LOADOUT_POSITION_MELEE);
-			bot->GiveRandomItem(LOADOUT_POSITION_PDA);
-			bot->GiveRandomItem(LOADOUT_POSITION_PDA2);
-			bot->GiveRandomItem(LOADOUT_POSITION_BUILDING);
-			bot->GiveRandomItem(LOADOUT_POSITION_UTILITY);
-			bot->GiveRandomItem(LOADOUT_POSITION_ACTION);
-
+			// moved
 		}
 	}
 	PostInventoryApplication();

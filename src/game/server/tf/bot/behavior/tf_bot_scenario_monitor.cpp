@@ -280,19 +280,24 @@ Action< CTFBot > *CTFBotScenarioMonitor::DesiredScenarioAndClassAction( CTFBot *
 		// capture the flag
 		return new CTFBotFetchFlag;
 	}
-	else if ( TFGameRules()->GetGameType() == TF_GAMETYPE_ESCORT )
+	else if (TFGameRules()->GetGameType() == TF_GAMETYPE_ESCORT && !TFGameRules()->HasMultipleTrains())
 	{
 		// push the cart
-		if ( me->GetTeamNumber() == TF_TEAM_BLUE )
+		if (me->GetTeamNumber() == TF_TEAM_BLUE)
 		{
 			// blu is pushing
 			return new CTFBotPayloadPush;
 		}
-		else if ( me->GetTeamNumber() == TF_TEAM_RED )
+		else if (me->GetTeamNumber() == TF_TEAM_RED)
 		{
 			// red is blocking
 			return new CTFBotPayloadGuard;
 		}
+	}
+	else if (TFGameRules()->HasMultipleTrains())
+	{
+		// push the cart
+		return new CTFBotPayloadPush;
 	}
 	else if ( TFGameRules()->GetGameType() == TF_GAMETYPE_CP )
 	{
